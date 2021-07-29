@@ -5,5 +5,5 @@ if fs.exists("/etc/password") == false then
   file.stream:close();
 end
 local file2 = io.open("/etc/profile.lua", "a");
-file2.stream:write("\ndofile(\"/bin/lock.lua\")");
+file2.stream:write("\ndofile(\"/usr/bin/lock.lua\")");
 file2.stream:close();
