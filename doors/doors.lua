@@ -63,5 +63,10 @@ elseif args[1] == "lockdown" then
   setDoor("s",0);
   setDoor("w",0);
 else
-  print("Unknown action.");
+  print("Door Control");
+  print("Usage:");
+  print("`doors open <side>` to open a door");
+  print("`doors close <side>` to close a door");
+  print("`doors check <side>` to check a door");
+  print("`doors lockdown` to close all doors");
 end
