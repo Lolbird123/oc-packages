@@ -11,7 +11,12 @@ if args[1] == "on" then
 elseif args[1] == "off" then
   rs.setBundledOutput(sides.top, {[colors.white] = 0});
 elseif args[1] == "check" then
-  print(rs.getBundledOutput(sides.top, colors.white));
+  local power = rs.getBundledOutput(sides.top, colors.white);
+  if power > 0 then
+    print("Enabled");
+  else
+    print("Disabled");
+  end
 else
-  print("Unknown action.");
+  print("Unknown action");
 end
