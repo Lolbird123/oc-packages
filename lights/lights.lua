@@ -11,3 +11,5 @@ if args[1] == "on" then
 elseif args[1] == "off" then
   rs.setBundledOutput(sides.top, {[colors.white] = 0});
 else
+  print("Unknown action.");
+end
