@@ -18,5 +18,9 @@ elseif args[1] == "check" then
     print("Disabled");
   end
 else
-  print("Unknown action");
+  print("Light Control");
+  print("Usage:");
+  print("`lights on` turn on the lights");
+  print("`lights off` turn off the lights");
+  print("`lights check` check the lights");
 end
