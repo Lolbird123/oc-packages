@@ -9,10 +9,10 @@ do
 end
 
 while true do
-  os.system("clear")
+  os.execute("clear")
   local input = getpass()
   if input == password then
-    os.system("clear")
+    os.execute("clear")
     break
   else
     print("incorrect")
