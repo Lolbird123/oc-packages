@@ -20,8 +20,25 @@ end
 local path = opts["path"] or "/home"
 local name = opts["name"] or "default"
 local file = shell.resolve(args[1])
+local key_file = path.."/"..name..".priv"
 
 if not filesystem.exists(file) then
   print("file not found")
   return
 end
+if not filesystem.exists(key_file) then
+  print("private key not found")
+  return
+end
+local f
+f = filesystem.open(file, "r")
+local data = f:read(math.huge)
+f:close()
+f = filesystem.open(key_file, "r")
+local key = f:read(math.huge)
+f:close()
+key = data.deserializeKey(key, "ec-private")
+local sig = data.ecdsa(data, key)
+f = filesystem.open(file..".sig", "w")
+f:write(sig)
+f:close()
