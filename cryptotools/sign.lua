@@ -34,13 +34,13 @@ if not filesystem.exists(key_file) then
 end
 local f
 f = filesystem.open(file, "r")
-local data = f:read(math.huge)
+local content = f:read(math.huge)
 f:close()
 f = filesystem.open(key_file, "r")
 local key = f:read(math.huge)
 f:close()
 key = data.deserializeKey(key, "ec-private")
-local sig = data.ecdsa(data, key)
+local sig = data.ecdsa(content, key)
 f = filesystem.open(file..sigsuf, "w")
 f:write(sig)
 f:close()
