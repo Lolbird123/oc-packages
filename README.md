@@ -1,2 +1,2 @@
 # oc-packages
-Random opencomputers packages
+random opencomputers packages
