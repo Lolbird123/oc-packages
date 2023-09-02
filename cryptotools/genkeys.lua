@@ -20,8 +20,8 @@ if opts["help"] or opts["h"] then
   return
 end
 
-local path = opts["path"] or "/home"
-local name = opts["name"] or "key"
+local path = opts["path"] or opts["p"] or "/home"
+local name = opts["name"] or opts["n"] or "default"
 local bits = tonumber(opts["bits"]) or 384
 local pub, priv = data.generateKeyPair(bits)
 pub = pub.serialize()
