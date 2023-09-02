@@ -14,11 +14,13 @@ if opts["help"] or opts["h"] or not args[1] then
   print("-h --help : show this")
   print("-p --path <path> : set a custom path to load keys from instead of /home")
   print("-n --name <name> : set a custom name to save keys as instead of default")
+  print("-s --sig <name> : specify a custom signature suffix instead of .sig")
   return
 end
 
-local path = opts["path"] or "/home"
-local name = opts["name"] or "default"
+local path = opts["path"] or opts["p"] or "/home"
+local name = opts["name"] or opts["n"] or "default"
+local sigsuf = opts["sig"] or opts["s"] or ".sig"
 local file = shell.resolve(args[1])
 local key_file = path.."/"..name..".priv"
 
@@ -39,6 +41,6 @@ local key = f:read(math.huge)
 f:close()
 key = data.deserializeKey(key, "ec-private")
 local sig = data.ecdsa(data, key)
-f = filesystem.open(file..".sig", "w")
+f = filesystem.open(file..sigsuf, "w")
 f:write(sig)
 f:close()
