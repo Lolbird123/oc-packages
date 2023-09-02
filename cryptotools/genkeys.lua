@@ -11,6 +11,7 @@ end
 local data = component.data
 
 if opts["help"] or opts["h"] then
+  print("genkeys [options]")
   print("-h --help : show this")
   print("-p --path <path> : set a custom path to save keys to instead of /home")
   print("-n --name <name> : set a custom name to save keys as instead of key")
