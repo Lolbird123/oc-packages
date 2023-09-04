@@ -13,22 +13,20 @@ local data = component.data
 if opts["help"] or opts["h"] then
   print("genkeys [options]")
   print("-h --help : show this")
-  print("-p --path <path> : set a custom path to save keys to instead of /home")
-  print("-n --name <name> : set a custom name to save keys as instead of key")
+  print("-p --path=<path> : set a custom path to save keys to instead of /home/default.<type>")
   print("-b --bits <bits> : set a custom bit length instead of 384")
   print("-q --quiet : dont ask questions")
   return
 end
 
-local path = opts["path"] or opts["p"] or "/home"
-local name = opts["name"] or opts["n"] or "default"
+local path = opts["path"] or opts["p"] or "/home/default"
 local bits = tonumber(opts["bits"]) or 384
 local pub, priv = data.generateKeyPair(bits)
 pub = pub.serialize()
 priv = priv.serialize()
 
-if (filesystem.exists(path.."/"..name..".pub") or filesystem.exists(path.."/"..name..".priv")) and not opts["q"] and not opts["quiet"] then
-  print("keys already exist with this name at this path, and will be overwritten")
+if (filesystem.exists(path..".pub") or filesystem.exists(path..".priv")) and not opts["q"] and not opts["quiet"] then
+  print("keys already exist at this path, and will be overwritten")
   term.write("are you sure? [y/n]: ")
   local answer = term.read()
   answer = string.sub(answer, 1, 1)
@@ -39,9 +37,9 @@ if (filesystem.exists(path.."/"..name..".pub") or filesystem.exists(path.."/"..n
 end
 
 local f
-f = filesystem.open(path.."/"..name..".pub", "w")
+f = filesystem.open(path..".pub", "w")
 f:write(pub)
 f:close()
-f = filesystem.open(path.."/"..name..".priv", "w")
+f = filesystem.open(path..".priv", "w")
 f:write(priv)
 f:close()
